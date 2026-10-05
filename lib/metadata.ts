@@ -1,17 +1,12 @@
 import type { Metadata } from 'next'
 
-export const metadataBase = {
-  title: 'Open IPTV Federation',
-  description: 'Federated live television, community channels, authorized sources and transparent moderation.'
-}
-
 export const defaultMetadata: Metadata = {
   metadataBase: new URL('https://openiptv.example'),
   title: {
     default: 'Open IPTV Federation',
     template: '%s | Open IPTV Federation'
   },
-  description: 'Global open IPTV federation for authorized live broadcasters, communities, and creators.',
+  description: 'Global open IPTV federation for authorized live broadcasters, communities and creators.',
   keywords: ['IPTV', 'federation', 'live TV', 'community channels', 'broadcasting'],
   openGraph: {
     title: 'Open IPTV Federation',

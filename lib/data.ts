@@ -119,7 +119,7 @@ export const channelFeed = [
     isOfficial: false,
     approved: false
   }
-]
+] as const
 
 export const communities = [
   {
@@ -152,7 +152,7 @@ export const communities = [
     status: 'review',
     members: 2100
   }
-]
+] as const
 
 export const moderationLog = [
   {

@@ -1,0 +1,120 @@
+import Link from 'next/link'
+import { channelFeed, communities, moderationLog } from '@/lib/data'
+import { quickStats, featurePills } from '@/lib/summary'
+import { ChannelCard } from '@/components/channel-card'
+
+export default function HomePage() {
+  return (
+    <>
+      <section className="hero">
+        <div className="container hero-grid">
+          <div>
+            <p className="eyebrow">Open IPTV Federation</p>
+            <h1>Global live television, connected without losing identity.</h1>
+            <p className="lede">Federated broadcasting for official channels, independent communities, and creator-led sources. We present authorized sources, retain their identity, and keep the channel operating with clarity and trust.</p>
+            <div className="hero-actions">
+              <Link href="/live" className="primary-button">Watch live</Link>
+              <Link href="/submit" className="secondary-button">Submit a source</Link>
+            </div>
+            <div className="chip-row">
+              {featurePills.map((pill) => (
+                <span key={pill} className="chip">{pill}</span>
+              ))}
+            </div>
+          </div>
+
+          <div className="hero-panel">
+            <div className="feature-box">
+              <span className="eyebrow">Live now</span>
+              <h3>World News & Public Interest</h3>
+              <p>Official and community-backed channels remain independent while the federation presents them cleanly and responsibly.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="stats-band">
+        <div className="container stats-grid">
+          {quickStats.map((item) => (
+            <div key={item.label} className="stat-item">
+              <strong>{item.value}</strong>
+              <span>{item.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div className="container">
+          <div className="section-header">
+            <div>
+              <p className="eyebrow">Live discovery</p>
+              <h2>Authorized channels and global live coverage</h2>
+            </div>
+            <Link href="/live" className="text-link">Explore all live channels</Link>
+          </div>
+
+          <div className="card-grid">
+            {channelFeed.slice(0, 4).map((channel) => (
+              <ChannelCard key={channel.id} channel={channel} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell muted-shell">
+        <div className="container">
+          <div className="section-header">
+            <div>
+              <p className="eyebrow">Communities</p>
+              <h2>Independent community channels and creators</h2>
+            </div>
+            <Link href="/community" className="text-link">Open community directory</Link>
+          </div>
+
+          <div className="community-grid">
+            {communities.map((community) => (
+              <article key={community.id} className="community-card">
+                <div className="community-topline">
+                  <span>{community.category}</span>
+                  <span className={`status-pill status-${community.status}`}>{community.status}</span>
+                </div>
+                <h3>{community.name}</h3>
+                <p>{community.description}</p>
+                <ul>
+                  <li>{community.location}</li>
+                  <li>{community.language}</li>
+                  <li>{community.members.toLocaleString()} members</li>
+                </ul>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div className="container compact-grid">
+          <div>
+            <p className="eyebrow">Policy gateway</p>
+            <h2>Human moderation remains the final authority.</h2>
+            <p>Automated review flags risk, but uncertain or higher-risk cases move to moderation. We preserve rights, identity and source control.</p>
+            <Link href="/policies/content-policy" className="text-link">Read the policy</Link>
+          </div>
+
+          <div className="stack-list">
+            {moderationLog.map((item) => (
+              <div key={item.id} className="mini-card">
+                <div className="mini-topline">
+                  <span>{item.decision}</span>
+                  <small>{item.createdAt}</small>
+                </div>
+                <h3>{item.title}</h3>
+                <p>{item.notes}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}

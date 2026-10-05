@@ -19,7 +19,8 @@ export function evaluateSubmission(form: {
   if (!form.consent) reasons.push('Creator consent must be provided.')
   if (!form.policyAccepted) reasons.push('Policy acceptance is required.')
 
-  if (form.description.toLowerCase().includes('sexual') || form.description.toLowerCase().includes('kill')) {
+  const lower = form.description.toLowerCase()
+  if (lower.includes('sexual') || lower.includes('kill')) {
     reasons.push('Content description contains terms requiring human review.')
   }
 
